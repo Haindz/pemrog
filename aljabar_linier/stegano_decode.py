@@ -37,7 +37,6 @@ def decode_message(image_path):
 
 # Contoh penggunaan
 output_image = "C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/anayycoba.png"  # Path ke gambar hasil encode
-password = "gokil123"  # Password untuk enkripsi
 
 # Ambil pesan dari gambar
 decoded_message = decode_message(output_image)
