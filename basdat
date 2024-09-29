@@ -1,0 +1,190 @@
+#electro_db
+CREATE TABLE products (
+  product_id int NOT NULL,
+  product_name varchar(45) NOT NULL,
+  category varchar(255) NOT NULL,
+  price decimal NOT NULL,
+  PRIMARY KEY (product_id),
+  UNIQUE (product_id)
+);
+
+INSERT INTO products VALUES
+(1, 'Watch', 'Gadget', 200000),
+(2, 'Smartphone', 'Gadget', 3000000),
+(3, 'Laptop', 'Gadget', 5000000),
+(4, 'Kulkas', 'Kitchen', 300000),
+(5, 'Rice Cooker', 'Kitchen', 100000),
+(6, 'Microwave', 'Kitchen', 800000),
+(7, 'Air Conditioner', 'Room', 950000),
+(8, 'Air Purifier', 'Room', 2500000),
+(9, 'Heater', 'Room', 700000),
+(10, 'Toaster', 'Kitchen', 100000),
+(11, 'Lamp', 'Room', 20000),
+(12, 'CCTV', 'Room', 750000);
+
+CREATE TABLE sales (
+  sale_id int NOT NULL,
+  product_id int NOT NULL,
+  quantity int NOT NULL,
+  sales_date DATE NOT NULL,
+  PRIMARY KEY (sale_id),
+  UNIQUE (sale_id)
+);
+
+INSERT INTO sales VALUES
+(1, 1, 3, '2024-06-10'),
+(2, 1, 1, '2024-07-01'),
+(3, 3, 1, '2024-07-01'),
+(4, 2, 1, '2024-09-23'),
+(5, 8, 5, '2024-09-23'),
+(6, 5, 1, '2024-09-23'),
+(7, 6, 2, '2024-09-23'),
+(8, 1, 1, '2024-09-23'),
+(9, 4, 2, '2024-09-23'),
+(10, 9, 8, '2024-09-30'),
+(11, 7, 1, '2024-09-30'),
+(12, 4, 3, '2024-09-30'),
+(13, 2, 4, '2024-09-30'),
+(14, 1, 1, '2024-10-12'),
+(15, 9, 2, '2024-10-18'),
+(16, 12, 3, '2024-10-20'),
+(17, 10, 1, '2024-10-20'),
+(18, 11, 2, '2024-11-08');
+
+select distinct category,
+count (distinct products.product_name) as total_products,
+count (sales.sale_id) as total_sales,
+avg (products.price) as average_price
+from products
+left join sales on products.product_id=sales.product_id
+group by category
+order by category;
+
+
+#edu_db
+CREATE TABLE courses (
+  course_id int NOT NULL,
+  course_name varchar(255) NOT NULL,
+  category varchar(255) NOT NULL,
+  PRIMARY KEY (course_id),
+  UNIQUE (course_id)
+);
+
+INSERT INTO courses VALUES
+(1, 'Ruangguru', 'Matematika'),
+(2, 'Ruangguru', 'Bahasa Inggris'),
+(3, 'Ruangguru', 'Fisika'),
+(4, 'Kumon', 'Kimia'),
+(5, 'Kumon', 'Bahasa Jepang'),
+(6, 'Udemy', 'Manajemen'),
+(7, 'Udemy', 'Public Speaking'),
+(8, 'Udemy', 'Sains Data');
+
+CREATE TABLE enrollments (
+  enrollment_id int NOT NULL,
+  course_id int NOT NULL,
+  student_id int NOT NULL,
+  date date,
+  PRIMARY KEY (enrollment_id),
+  UNIQUE (enrollment_id)
+);
+
+INSERT INTO enrollments VALUES
+(1, 1, 1001, '2024-09-01'),
+(2, 4, 1002, '2024-09-01'),
+(3, 2, 1003, '2024-09-03'),
+(4, 1, 1004, '2024-09-04'),
+(5, 3, 1005, '2024-09-05'),
+(6, 3, 1006, '2024-09-05'),
+(7, 5, 1007, '2024-09-05'),
+(8, 7, 1008, '2024-09-06'),
+(9, 8, 1009, '2024-09-09'),
+(10, 6, 1010, '2024-09-11'),
+(11, 1, 1011, '2024-09-11'),
+(12, 2, 1012, '2024-09-12');
+
+CREATE TABLE grades (
+  grade_id int NOT NULL,
+  enrollment_id int NOT NULL,
+  score int NOT NULL,
+  status varchar,
+  PRIMARY KEY (grade_id),
+  UNIQUE (grade_id)
+);
+
+INSERT INTO grades VALUES
+(1, 1, 88, 'LULUS'),
+(2, 2, 90, 'LULUS'),
+(3, 3, 84, 'LULUS'),
+(4, 4, 93, 'LULUS'),
+(5, 5, 61, 'TIDAK LULUS'),
+(6, 6, 80, 'LULUS'),
+(7, 7, 49, 'TIDAK LULUS'),
+(8, 8, 98, 'LULUS'),
+(9, 9, 91, 'LULUS'),
+(10, 10, 83, 'LULUS'),
+(11, 11, 85, 'LULUS'),
+(12, 12, 78, 'LULUS');
+
+select
+courses.course_name as "Nama Kursus",
+count(enrollments.enrollment_id) as "Jumlah Siswa Mendaftar",
+count(case when grades.status = 'LULUS' then 1 end) as "Jumlah Siswa Lulus",
+round((count(case when grades.status = 'LULUS' then 1 end) * 100.0)/count(enrollments.enrollment_id), 2)
+as "Persentase Kelulusan (%)"
+from courses
+join enrollments on courses.course_id = enrollments.course_id
+left join grades on enrollments.enrollment_id = grades.enrollment_id
+group by courses.course_name;
+
+
+
+
+
+
+CREATE TABLE mahasiswa (
+  nim int NOT NULL,
+  nama varchar NOT NULL,
+  jenis_kelamin varchar NOT NULL,
+  alamat varchar NOT NULL,
+  PRIMARY KEY (nim),
+  UNIQUE (nim)
+);
+
+INSERT INTO mahasiswa VALUES
+(101, 'Arif', 'L', 'Jl. Kenangan'),
+(102, 'Budi', 'L', 'Jl. Jombang'),
+(103, 'Wati', 'P', 'Jl. Surabaya'),
+(104, 'Ika', 'P', 'Jl. Jombang'),
+(105, 'Tono', 'L', 'Jl. Jakarta'),
+(106, 'Iwan', 'L', 'Jl. Bandung'),
+(107, 'Sari', 'P', 'Jl. Malang');
+
+CREATE TABLE ambil_mk (
+  nim int NOT NULL,
+  kode_mk varchar NOT NULL
+);
+
+INSERT INTO ambil_mk VALUES
+(101, 'PTI447'),
+(103, 'TIK333'),
+(104, 'PTI333'),
+(104, 'PTI777'),
+(111, 'PTI123'),
+(123, 'PTI999');
+
+CREATE TABLE matakuliah (
+  kode_mk varchar NOT NULL,
+  nama_mk varchar NOT NULL,
+  sks int NOT NULL,
+  semester int NOT NULL
+);
+
+INSERT INTO matakuliah VALUES
+('PTI447', 'Praktikum Basis Data', 1, 3),
+('TIK342', 'Praktikum Basis Data', 1, 3),
+('PTI333', 'Basis Data Terdistribusi', 3, 5),
+('TIK123', 'Jaringan Komputer', 2, 5),
+('TIK333', 'Sistem Operasi', 3, 5),
+('PTI123', 'Grafika Multimedia', 3, 5),
+('PTI777', 'Sistem Informasi', 2, 3);
