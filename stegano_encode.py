@@ -42,7 +42,7 @@ def encode_message(image_path, message, password, output_path):
     print("Pesan berhasil disembunyikan ke dalam gambar.")
 
 # Contoh penggunaan
-input_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/coba.png'  # Path ke gambar input
+input_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/anjay.png'  # Path ke gambar input
 output_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/anayycoba.png'  # Path ke gambar hasil encode
 pesan = "cihuyyyyyyy anjayyyyy"  # Pesan yang akan disembunyikan
 password = "gokil123"  # Password untuk enkripsi

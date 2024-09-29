@@ -36,9 +36,7 @@ def decode_message(image_path):
     return decrypted_message
 
 # Contoh penggunaan
-input_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/coba.png'  # Path ke gambar input
-output_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/anayycoba.png'  # Path ke gambar hasil encode
-pesan = "cihuyyyyyyy anjayyyyy"  # Pesan yang akan disembunyikan
+output_image = "C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/anayycoba.png"  # Path ke gambar hasil encode
 password = "gokil123"  # Password untuk enkripsi
 
 # Ambil pesan dari gambar
