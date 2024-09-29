@@ -83,3 +83,4 @@ encode_message(input_image, pesan, password, output_image)
 # Ambil pesan dari gambar
 decoded_message = decode_message(output_image)
 print("Pesan tersembunyi:", decoded_message)
+
