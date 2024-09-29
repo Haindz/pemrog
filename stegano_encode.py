@@ -1,16 +1,24 @@
 from PIL import Image
 
+# Fungsi XOR untuk enkripsi dan dekripsi
+def xor_encrypt_decrypt(message, password):
+    encrypted_message = ''.join(chr(ord(c) ^ ord(password[i % len(password)])) for i, c in enumerate(message))
+    return encrypted_message
+
 # Fungsi untuk menyembunyikan pesan ke dalam gambar
-def encode_message(image_path, message, output_path):
+def encode_message(image_path, message, password, output_path):
+    # Enkripsi pesan dengan password
+    encrypted_message = xor_encrypt_decrypt(message, password)
+    
     # Buka gambar
     img = Image.open(image_path)
     encoded_img = img.copy()
     width, height = img.size
     pixels = encoded_img.load()
 
-    # Konversi pesan ke biner
-    message += chr(0)  # Menambahkan karakter akhir pesan (Null terminator)
-    binary_message = ''.join([format(ord(i), "08b") for i in message])
+    # Konversi pesan terenkripsi ke biner
+    encrypted_message += chr(0)  # Menambahkan karakter akhir pesan (Null terminator)
+    binary_message = ''.join([format(ord(i), "08b") for i in encrypted_message])
 
     # Pastikan pesan tidak terlalu panjang
     if len(binary_message) > width * height * 3:
@@ -33,11 +41,11 @@ def encode_message(image_path, message, output_path):
     encoded_img.save(output_path)
     print("Pesan berhasil disembunyikan ke dalam gambar.")
 
-
 # Contoh penggunaan
 input_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/coba.png'  # Path ke gambar input
 output_image = 'C:/Users/HAFIDZ/OneDrive/Documents/Kuliah/Aljabar Linier/anayycoba.png'  # Path ke gambar hasil encode
 pesan = "cihuyyyyyyy anjayyyyy"  # Pesan yang akan disembunyikan
+password = "gokil123"  # Password untuk enkripsi
 
 # Sembunyikan pesan
-encode_message(input_image, pesan, output_image)
+encode_message(input_image, pesan, password, output_image)
